@@ -9,3 +9,4 @@ This app is built with Python Flask as backend and React as front end framework
 5.) Operator can undo the action by clicking undo on top.
 6.) Operator can view intersection data by clicking intersection.
 7.) Operator can Logout by clicking logout on top right.
+8.) An undo all feature is also written on the backend, but not yet implemented on the frontend due to time constraint.
