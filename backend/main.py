@@ -3,7 +3,7 @@ from flask_cors import CORS
 import random
 import ast
 app = Flask(__name__)
-app.secret_key = "secretkey"
+app.secret_key = os.environ.get("SECRET_KEY")
 app.config['CORS_HEADERS'] = 'Content-Type'
 ERROR_CODES = [error_code for error_code in range(50)]
 CORS(app)
@@ -36,18 +36,6 @@ def generate_lists():
     response = jsonify(generated_list)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
-
-@app.route("/stored_list/<code>/<status>")
-def stored_list(code,status):
-    for each in session["list"]:
-        if each["code"] == code:
-            index = each["index"]
-            if status == "resolved":
-                session["list"][index]["status"] = "unresolved"
-            else:
-                session["list"][index]["status"] = "resolved"
-            return jsonify(session["list"])
-    return jsonify(session["list"])
 
 @app.route("/undo_all",methods=["GET"])   #Undos all data based on session cookie
 def undo_all():
